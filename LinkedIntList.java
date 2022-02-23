@@ -237,10 +237,23 @@ public class LinkedIntList {
 
     // YOUR CODE GOES HERE
     public int lastIndexOf(int target) {
-        // Go
+        // Go through all the ListNodes and remember the last occurrence
 
-        //for (int i = )
-        return -1;
+        // We default to not having found the item
+        int lastIndex = -1;
+        for (int i = 0; i < size(); ++i) {
+
+            if (get(i) == target) {
+                lastIndex = i;
+            }
+        }
+        return lastIndex;
+    }
+
+    public int countDuplicates() {
+        int duplicates = 0;
+
+        return duplicates;
     }
 
 }
