@@ -252,8 +252,33 @@ public class LinkedIntList {
 
     public int countDuplicates() {
         int duplicates = 0;
-
+        int prev;
+        for (int i = 1; i < size(); ++i) {
+            prev = get(i-1);
+            if (get(i) == prev) {
+                ++duplicates;
+            }
+        }
         return duplicates;
     }
 
+    public boolean hasTwoConsecutive() {
+        int prev;
+        for (int i = 1; i < size(); ++i) {
+            if (get(i) == get(i-1) + 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int deleteBack() { // Delete last item in the list
+        // If there's no items, then throw an exception
+        if (size() == 0) {
+            throw new NoSuchElementException();
+        }
+        int num = get(size()-1);
+        remove(size()-1);
+        return num;
+    }
 }
