@@ -241,33 +241,46 @@ public class LinkedIntList {
 
         // We default to not having found the item
         int lastIndex = -1;
-        for (int i = 0; i < size(); ++i) {
-
-            if (get(i) == target) {
+        ListNode current = front;
+        for (int i = 0; i < size(); i++) {
+            if (current.data == target) {
                 lastIndex = i;
             }
+            current = current.next;
         }
+        // return the last occurrence, or -1 if there weren't any
         return lastIndex;
     }
 
     public int countDuplicates() {
+        // Compare the current number to the previous, if they're a duplicate, increase the counter
         int duplicates = 0;
-        int prev;
-        for (int i = 1; i < size(); ++i) {
-            prev = get(i-1);
-            if (get(i) == prev) {
+        ListNode current = front;
+        int prev = current.data;
+        current = current.next;
+        for (int i = 1; i < size(); i++) {
+            if (current.data == prev) {
                 ++duplicates;
             }
+            prev = current.data;
+            current = current.next;
         }
+        // return number of dupes found
         return duplicates;
     }
 
     public boolean hasTwoConsecutive() {
-        int prev;
-        for (int i = 1; i < size(); ++i) {
-            if (get(i) == get(i-1) + 1) {
+        // similar strategy as countDuplicates, where you compare the current and previous, and
+        // see if they're consecutive integers.
+        ListNode current = front;
+        int prev = current.data;
+        current = current.next;
+        for (int i = 1; i < size(); i++) {
+            if (current.data == prev + 1) {
                 return true;
             }
+            prev = current.data;
+            current = current.next;
         }
         return false;
     }
@@ -277,6 +290,7 @@ public class LinkedIntList {
         if (size() == 0) {
             throw new NoSuchElementException();
         }
+        // need variable to save last int before it gets removed
         int num = get(size()-1);
         remove(size()-1);
         return num;
